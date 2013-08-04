@@ -2,6 +2,10 @@ Tracker::Application.routes.draw do
   get "auth/index"
   get "auth/login"
   get "auth/logout"
+  post "auth/attempt_login"
+  get "tracking/menu"
+  get "auth/new"
+  post "auth/create"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

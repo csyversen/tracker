@@ -1,2 +1,18 @@
-<h1>Auth#login</h1>
-<p>Find me in app/views/auth/login.html.erb</p>
+<div class="login">
+  <%= form_tag({:action => "attempt_login"}, :class => "form-horizontal")  do %>
+  <table>
+    <tr>
+      <td><%= label_tag(:username) %></td>
+      <td><%= text_field_tag(:username) %></td>
+    </tr>
+    <tr>
+      <td><%= label_tag(:password) %></td>
+      <td><%= password_field_tag(:password) %></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><%= submit_tag("Log in") %></td>
+    </tr>
+  </table>
+  <% end %>
+</div>
