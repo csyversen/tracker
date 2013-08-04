@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
 
   def password_match?(password = "")
-    hashed_password == User.hash_with_salt(password, salt)
+    self.password == User.hash_with_salt(password, salt)
   end
 
 
@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
     unless password.blank?
       # always use "self" when assigning values
       self.salt = User.make_salt(username) if salt.blank?
-      self.hashed_password = User.hash_with_salt(password, salt)
+      self.password = User.hash_with_salt(password, salt)
     end
   end
 
