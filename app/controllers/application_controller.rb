@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   def confirm_logged_in
     unless session[:user_id]
       flash[:notice] = "Please log in."
+      flash[:flash_class] = "alert alert-danger"
       redirect_to(:controller => "auth", :action => "login")
       return false # halts the before_filter
     else
