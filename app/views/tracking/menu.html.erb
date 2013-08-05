@@ -1,0 +1,18 @@
+<div class="product list">
+
+  <div><%= pluralize(@pages.size, "product") %> found</div>
+  <table class="listing" summary="product list">
+    <tr class="header">
+      <th>Product</th>d
+      <th>Current Price</th>
+      <th>Lowest Price</th>
+    </tr>
+    <% @products.each do |p| %>
+    <tr class="<%= cycle('odd', 'even')%>">
+      <td><%= p.name %></td>
+      <td><%= p.current_price %></td>
+      <td><%= p.lowest_price %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>

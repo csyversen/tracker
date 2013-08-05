@@ -2,7 +2,7 @@ require "digest/sha2"
 
 class User < ActiveRecord::Base
 
-  has_many :products
+  has_and_belongs_to_many :products
 
   before_save :create_hashed_password
   after_save :clear_password
@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
 
   def password_match?(password = "")
-    self.password == User.hash_with_salt(password, salt)
+    self.hashed_password == User.hash_with_salt(password, salt)
   end
 
 
@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
     unless password.blank?
       # always use "self" when assigning values
       self.salt = User.make_salt(username) if salt.blank?
-      self.password = User.hash_with_salt(password, salt)
+      self.hashed_password = User.hash_with_salt(password, salt)
     end
   end
 

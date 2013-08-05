@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130802184655) do
+ActiveRecord::Schema.define(version: 20130805164612) do
 
   create_table "prices", force: true do |t|
     t.integer  "product_id"
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 20130802184655) do
 
   create_table "users", force: true do |t|
     t.string   "username"
-    t.string   "salt",       limit: 64
-    t.string   "password",   limit: 64
+    t.string   "salt",            limit: 64
+    t.string   "hashed_password", limit: 64
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
