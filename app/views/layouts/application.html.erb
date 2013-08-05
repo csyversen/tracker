@@ -8,7 +8,26 @@
 </head>
 <body>
 
-<%= yield %>
+  <div class="navbar">
+    <div class="container">
+    <!--<a class="navbar-brand" href="#">Title</a>-->
+    <ul class="nav navbar-nav">
+      <li class="active"><%= link_to("Login", {:controller => "auth", :action => "login"}) %></li>
+      <li><%= link_to("Products", {:controller => "tracking", :action => "menu"}) %></li>
+      <li><%= link_to("Logout", {:controller => "auth", :action => "logout"}) %></li>
+    </ul>
+  </div>
+  </div>
 
+  <div id="container">
+    <% if !flash[:notice].blank? %>
+      <div class=<%= flash[:flash_class] %>>
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <div id="content">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

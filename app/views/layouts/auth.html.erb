@@ -8,11 +8,20 @@
 </head>
 <body>
 
+<div class="navbar">
+  <!--<a class="navbar-brand" href="#">Title</a>-->
+  <ul class="nav navbar-nav">
+    <li class="active"><%= link_to("Login", {:controller => "auth", :action => "login"}) %></li>
+    <li><%= link_to("Products", {:controller => "tracking", :action => "menu"}) %></li>
+    <li><%= link_to("Logout", {:controller => "auth", :action => "logout"}) %></li>
+  </ul>
+</div>
+
   <div id="main">
     <% if !flash[:notice].blank? %>
-    <div class="notice">
-      <%= flash[:notice] %>
-    </div>
+      <div class="alert alert-danger">
+        <%= flash[:notice] %>
+      </div>
     <% end %>
     <div id="content">
       <%= yield %>

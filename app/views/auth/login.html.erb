@@ -1,18 +1,10 @@
-<div class="login">
-  <%= form_tag({:action => "attempt_login"}, :class => "form-horizontal")  do %>
-  <table>
-    <tr>
-      <td><%= label_tag(:username) %></td>
-      <td><%= text_field_tag(:username) %></td>
-    </tr>
-    <tr>
-      <td><%= label_tag(:password) %></td>
-      <td><%= password_field_tag(:password) %></td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td><%= submit_tag("Log in") %></td>
-    </tr>
-  </table>
+<div class="container">
+  <%= form_tag({:action => "attempt_login"}, :class => "form-signin")  do %>
+  
+      <%= text_field_tag "username", nil,  {:class => "input-block-level", :placeholder => "Username"} %>
+      
+      <%= password_field_tag "password", nil, {:class => "input-block-level", :placeholder => "Password"} %>
+    
+      <%= submit_tag "Log in", class: "btn btn-large btn-primary btn-block" %>
   <% end %>
 </div>

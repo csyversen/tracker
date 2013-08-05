@@ -1,6 +1,6 @@
 class AuthController < ApplicationController
 
-  layout "auth"
+  #layout "auth"
 
   def index
     render("login")
@@ -38,9 +38,11 @@ class AuthController < ApplicationController
       session[:user_id] = authorized_user.id
       session[:username] = authorized_user.username
       flash[:notice] = "You have successfully logged in"
+      flash[:flash_class] = "alert alert-success"
       redirect_to(:controller => "tracking", :action => "menu")
     else
       flash[:notice] = "Invalid username or password"
+      flash[:flash_class] = "alert alert-danger"
       redirect_to(:action => "login")
     end
   end

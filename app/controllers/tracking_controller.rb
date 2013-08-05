@@ -1,6 +1,5 @@
 class TrackingController < ApplicationController
 
-layout "auth"
 
 before_filter :confirm_logged_in
 before_filter :find_products
