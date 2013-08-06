@@ -1,10 +1,10 @@
 
 <div class="container">
 <div >
-  <%= form_tag({:action => "create"}, :class => "form")  do %>
+  <%= form_for(:product, url: {:action => "create"}, :class => "form-horizontal")  do |f| %>
   
-      <%= text_field_tag "product_url", nil,  {:class => "input span6", :placeholder => "Product URL"} %>
-      <%= submit_tag "Track", class: "btn btn-large btn-primary" %>
+      <%= f.text_field "url",  {:class => "input-xxlarge", :placeholder => "Product URL"} %>
+      <%= submit_tag "Track", class: "btn btn-primary" %>
   <% end %>
 </div>
 <div>

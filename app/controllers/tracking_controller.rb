@@ -1,3 +1,5 @@
+require 'uri/http'
+
 class TrackingController < ApplicationController
 
 
@@ -9,7 +11,24 @@ before_filter :find_products
   end
 
   def create
-    
+    uri = URI.parse(params[:product][:url])
+    domain = PublicSuffixList.parse(uri.host) 
+
+    @product = Product.new(:url => uri)
+
+    @product.sale_site = domain.domain
+
+
+    #if @user.save
+    #  flash[:notice] = "You have successfully created a user!"
+    #  redirect_to(:action => "login")
+    #else
+    #  flash[:notice] = "There was an issue saving your user"
+    #  @user.errors.full_messages.each do |msg|
+    #    puts msg
+    #  end
+    #  render("new")
+    #end
   end
 
 ############################
