@@ -8,6 +8,10 @@ before_filter :find_products
     
   end
 
+  def create
+    
+  end
+
 ############################
   private
 ############################  

@@ -1,5 +1,15 @@
-<div class="product list">
 
+<div class="container">
+<div >
+  <%= form_tag({:action => "create"}, :class => "form")  do %>
+  
+      <%= text_field_tag "product_url", nil,  {:class => "input span6", :placeholder => "Product URL"} %>
+      <%= submit_tag "Track", class: "btn btn-large btn-primary" %>
+  <% end %>
+</div>
+<div>
+
+<div class="product list">
   <div><%= pluralize(@products.size, "product") %> found</div>
   <table class="listing" summary="product list">
     <tr class="header">
