@@ -45,7 +45,7 @@ gem 'capistrano', group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'bootstrap-sass'
-gem 'public-suffix'
+gem 'public_suffix'
 gem 'nokogiri'
 
 
