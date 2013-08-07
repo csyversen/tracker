@@ -19,7 +19,7 @@ before_filter :confirm_logged_in
     @product.sale_site = domain.domain
     if @product.save
       flash[:notice] = "You are now tracking a new product!"
-      flash[:flash_class] = "alert alert-success"
+      flash[:flash_class] = "alert alert-success" #need to think about having view changes in the controller 
       redirect_to(:action => "menu")
     else
       flash[:notice] = "We weren't able to track that product, try using another url?"
