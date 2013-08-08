@@ -1,4 +1,6 @@
 require 'uri/http'
+require 'nokogiri'
+require 'open-uri'
 
 class TrackingController < ApplicationController
 
@@ -11,12 +13,24 @@ before_filter :confirm_logged_in
   end
 
   def create
-    uri = URI.parse(params[:product][:url])
+    # TODO: This should probably be done in the model, but this needs to check the url to be tracked to see if it already exists. If it does, only a record in the products_users table needs to be added, not a new product entry
+
+    url = params[:product][:url]
+    uri = URI.parse(url)
     domain = PublicSuffix.parse(uri.host) 
 
-    @product = Product.new(:url => uri)
+    @product = Product.new(:url => url)
     @product.users << User.find(session[:user_id])
     @product.sale_site = domain.domain
+
+    doc = Nokogiri::HTML(open("#{url}"))
+    price = doc.css("span#actualPriceValue")[0].text[1..-1]
+
+    p = Price.new
+
+    p.price = price
+    @product.prices << p
+
     if @product.save
       flash[:notice] = "You are now tracking a new product!"
       flash[:flash_class] = "alert alert-success" #need to think about having view changes in the controller 
@@ -30,19 +44,6 @@ before_filter :confirm_logged_in
       redirect_to(:action => "menu")
     end
 
-    # use nokogiri to grab the product name out of the metadata tags for amazon
-
-
-    #if @user.save
-    #  flash[:notice] = "You have successfully created a user!"
-    #  redirect_to(:action => "login")
-    #else
-    #  flash[:notice] = "There was an issue saving your user"
-    #  @user.errors.full_messages.each do |msg|
-    #    puts msg
-    #  end
-    #  render("new")
-    #end
   end
 
 ############################
