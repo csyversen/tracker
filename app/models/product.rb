@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
   #scope :current_price, -> { prices.last }
 
   def current_price
-    prices.last
+    prices.last.price
   end
 
   def lowest_price
