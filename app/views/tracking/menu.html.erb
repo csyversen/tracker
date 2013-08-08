@@ -19,7 +19,7 @@
       </tr>
       <% @products.each do |p| %>
       <tr class="<%= cycle('odd', 'even')%>">
-        <td><%= p.url %></td>
+        <td><%= link_to(p.name, p.url, :target => "_blank") %></td>
         <td><%= number_to_currency(p.current_price) %></td>
         <td><%= number_to_currency(p.lowest_price) %></td>
       </tr>

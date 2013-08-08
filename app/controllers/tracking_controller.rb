@@ -25,6 +25,7 @@ before_filter :confirm_logged_in
 
     doc = Nokogiri::HTML(open("#{url}"))
     price = doc.css("span#actualPriceValue")[0].text[1..-1]
+    @product.name = doc.css("span#btAsinTitle")[0].text
 
     p = Price.new
 
