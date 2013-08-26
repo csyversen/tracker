@@ -1,2 +1,12 @@
-<h1>Auth#login</h1>
-<p>Find me in app/views/auth/login.html.erb</p>
+<div class="row">
+  <div class="span6">
+  <%= form_tag({:action => "attempt_login"}, :class => "form-signin")  do %>
+  
+      <%= text_field_tag "username", nil,  {:class => "input-block-level", :placeholder => "Username"} %>
+      
+      <%= password_field_tag "password", nil, {:class => "input-block-level", :placeholder => "Password"} %>
+    
+      <%= submit_tag "Log in", class: "btn btn-large btn-primary btn-block" %>
+  <% end %>
+  </div>
+</div>

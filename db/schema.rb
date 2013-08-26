@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130802184655) do
+ActiveRecord::Schema.define(version: 20130808200011) do
 
   create_table "prices", force: true do |t|
     t.integer  "product_id"
-    t.integer  "price"
+    t.decimal  "price",      precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20130802184655) do
   create_table "products", force: true do |t|
     t.string   "name"
     t.string   "sale_site"
-    t.string   "url"
+    t.text     "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 20130802184655) do
 
   create_table "users", force: true do |t|
     t.string   "username"
-    t.string   "salt",       limit: 64
-    t.string   "password",   limit: 64
+    t.string   "salt",            limit: 64
+    t.string   "hashed_password", limit: 64
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
