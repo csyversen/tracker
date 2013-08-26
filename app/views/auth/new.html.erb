@@ -1,0 +1,12 @@
+<div class="form">
+  <h2>New Tracker User</h2>
+
+  <%= form_for(:user, :url => {:action => "create"}) do |f| %>
+
+    <%= render(:partial => "user", :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag("Create User") %>
+    </div>
+  <% end %>
+</div>
