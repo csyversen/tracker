@@ -1,12 +1,12 @@
-<div class="row">
-  <div class="span6">
+<div class="center hero-unit">
+  <h2>Please sign in.</h2>
   <%= form_tag({:action => "attempt_login"}, :class => "form-signin")  do %>
   
-      <%= text_field_tag "username", nil,  {:class => "input-block-level", :placeholder => "Username"} %>
+      <%= text_field_tag "username", nil,  {:class => "input", :placeholder => "Username"} %>
       
-      <%= password_field_tag "password", nil, {:class => "input-block-level", :placeholder => "Password"} %>
+      <%= password_field_tag "password", nil, {:class => "input", :placeholder => "Password"} %>
     
-      <%= submit_tag "Log in", class: "btn btn-large btn-primary btn-block" %>
+      <%= submit_tag "Log in", class: "btn btn-large btn-primary" %>
   <% end %>
-  </div>
+  
 </div>

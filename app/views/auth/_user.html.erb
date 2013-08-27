@@ -1,15 +1,12 @@
 
   <table summary="User form">
     <tr>
-      <th><%= f.label(:username) %></th>
-      <td><%= f.text_field(:username) %></td>
+      <td><%= f.text_field(:username, {class: "input", placeholder: "User name"}) %></td>
     </tr>
     <tr>
-      <th><%= f.label(:password) %></th>
-      <td><%= f.password_field(:password) %></td>
+      <td><%= f.password_field(:password, { class: "input", placeholder: "Password"}) %></td>
     </tr>
     <tr>
-      <th><%= f.label(:email) %></th>
-      <td><%= f.text_field(:email) %></td>
+      <td><%= f.text_field(:email, {class: "input", placeholder: "Email"}) %></td>
     </tr>
   </table>
