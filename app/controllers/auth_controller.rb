@@ -2,10 +2,6 @@ class AuthController < ApplicationController
 
   #layout "auth"
 
-  def index
-    render("login")
-  end
-
 
   def login
   end

@@ -1,12 +1,17 @@
 Tracker::Application.routes.draw do
-  get "auth/index"
-  get "auth/login"
-  get "auth/logout"
-  post "auth/attempt_login"
-  get "tracking/menu"
-  get "auth/new"
-  post "auth/create"
-  post "tracking/create"
+  #get "auth/index"
+  #get "auth/login"
+  #get "auth/logout"
+  #post "auth/attempt_login"
+
+  match '/login',             to: 'auth#login',         via: 'get'
+  match '/logout',            to: 'auth#logout',        via: 'get'
+  match 'auth/attempt_login', to: 'auth#attempt_login', via: 'post'
+  match 'tracking/menu',      to: 'tracking#menu',      via: 'get'
+  match 'auth/new',           to: 'auth#new',           via: 'get'
+  match 'auth/create',        to: 'auth#create',        via: 'post'
+  match 'tracking/create',    to: 'tracking#create',    via: 'post'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
