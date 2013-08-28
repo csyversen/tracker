@@ -13,14 +13,14 @@ class User < ActiveRecord::Base
 
   validates :email, :presence => true,
                     #:length => { :maxiumum => 50 }, 
-                    :uniqueness => true,
+                    :uniqueness => { case_sensitive: false },
                     #:format => { :with => EMAIL_REGEX },
                     :confirmation => true
 
 
 
-  def self.authenticate(username = "", password = "")
-    user = User.find_by_username(username)
+  def self.authenticate(email = "", password = "")
+    user = User.find_by(email: email)
     if user && user.password_match?(password)
       user
     else
@@ -39,8 +39,8 @@ class User < ActiveRecord::Base
   end
 
 
-  def self.make_salt(username = "")
-    Digest::SHA2.hexdigest("Use #{username} with #{Time.now} to maek salt")
+  def self.make_salt(email = "")
+    Digest::SHA2.hexdigest("Use #{email} with #{Time.now} to maek salt")
   end
 
 
@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
     # Whenever :password has a value hashing is needed
     unless password.blank?
       # always use "self" when assigning values
-      self.salt = User.make_salt(username) if salt.blank?
+      self.salt = User.make_salt(email) if salt.blank?
       self.hashed_password = User.hash_with_salt(password, salt)
     end
   end

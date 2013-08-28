@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130808200011) do
+ActiveRecord::Schema.define(version: 20130828175537) do
 
   create_table "prices", force: true do |t|
     t.integer  "product_id"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20130808200011) do
   add_index "products_users", ["product_id", "user_id"], name: "index_products_users_on_product_id_and_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "username"
     t.string   "salt",            limit: 64
     t.string   "hashed_password", limit: 64
     t.string   "email"
@@ -44,6 +43,6 @@ ActiveRecord::Schema.define(version: 20130808200011) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["username"], name: "index_users_on_username", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end

@@ -1,4 +1,5 @@
 Tracker::Application.routes.draw do
+  get "users/new"
   #get "auth/index"
   #get "auth/login"
   #get "auth/logout"
