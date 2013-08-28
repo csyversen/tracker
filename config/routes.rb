@@ -1,9 +1,6 @@
 Tracker::Application.routes.draw do
-  get "users/new"
-  #get "auth/index"
-  #get "auth/login"
-  #get "auth/logout"
-  #post "auth/attempt_login"
+
+  resources :users
 
   match '/login',             to: 'auth#login',         via: 'get'
   match '/logout',            to: 'auth#logout',        via: 'get'
