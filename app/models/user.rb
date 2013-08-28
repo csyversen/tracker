@@ -1,5 +1,3 @@
-require "digest/sha2"
-
 class User < ActiveRecord::Base
 
   before_save :to_lower
