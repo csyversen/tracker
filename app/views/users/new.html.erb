@@ -1,2 +1,10 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<div class="row">
+  <div class="span6 offset3">
+    <h2>New Tracker User</h2>
+
+    <%= form_for(@user) do |f| %>
+      <%= render(:partial => "user", :locals => {:f => f}) %>
+      <%= f.submit("Create User", class: "btn btn-large btn-primary") %>
+    <% end %>
+  </div>
+</div>
