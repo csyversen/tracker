@@ -1,20 +1,21 @@
 Tracker::Application.routes.draw do
 
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
-  match '/login',             to: 'auth#login',         via: 'get'
-  match '/logout',            to: 'auth#logout',        via: 'get'
-  match 'auth/attempt_login', to: 'auth#attempt_login', via: 'post'
-  match 'tracking/menu',      to: 'tracking#menu',      via: 'get'
-  match 'auth/new',           to: 'auth#new',           via: 'get'
-  match 'auth/create',        to: 'auth#create',        via: 'post'
-  match 'tracking/create',    to: 'tracking#create',    via: 'post'
+  match '/login',             to: 'sessions#new',         via: 'get'
+  match '/logout',            to: 'sessions#destroy',     via: 'delete'
+  match 'auth/attempt_login', to: 'auth#attempt_login',   via: 'post'
+  match 'tracking/menu',      to: 'tracking#menu',        via: 'get'
+  match 'auth/new',           to: 'auth#new',             via: 'get'
+  match 'auth/create',        to: 'auth#create',          via: 'post'
+  match 'tracking/create',    to: 'tracking#create',      via: 'post'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'auth#login'
+  root 'sessions#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
