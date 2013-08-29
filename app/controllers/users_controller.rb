@@ -7,9 +7,10 @@ class UsersController < ApplicationController
     @user = User.create(user_params)  #.permit(:email, :password, :confirmed_password))
     if @user.save
       # do whatever
-      flash[:notice] = "Successfully created a new user!"
+      flash[:success] = "Successfully created a new user!"
+      redirect_to @user
     else
-      flash[:notice] = @user.errors.full_messages
+      flash[:error] = @user.errors.full_messages
       render 'new'
     end
   end
