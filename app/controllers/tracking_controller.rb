@@ -9,7 +9,7 @@ before_filter :confirm_logged_in
 
 
   def menu
-    @products = User.find_by_username(session[:username]).products
+    @products = User.find(session[:user_id]).products
   end
 
   def create

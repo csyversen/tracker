@@ -5,10 +5,12 @@ Tracker::Application.routes.draw do
 
   match '/login',             to: 'sessions#new',         via: 'get'
   match '/logout',            to: 'sessions#destroy',     via: 'delete'
+  
   match 'auth/attempt_login', to: 'auth#attempt_login',   via: 'post'
-  match 'tracking/menu',      to: 'tracking#menu',        via: 'get'
   match 'auth/new',           to: 'auth#new',             via: 'get'
   match 'auth/create',        to: 'auth#create',          via: 'post'
+  
+  match 'tracking/menu',      to: 'tracking#menu',        via: 'get'  
   match 'tracking/create',    to: 'tracking#create',      via: 'post'
 
   # The priority is based upon order of creation: first created -> highest priority.
