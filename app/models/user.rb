@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   before_save :to_lower
+  before_create :create_remember_token
 
   has_and_belongs_to_many :products
   has_secure_password
@@ -16,6 +17,14 @@ class User < ActiveRecord::Base
 
 
 
+  def User.new_remember_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def User.encrypt(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
+
 
 ############################################################################
   private
@@ -24,6 +33,10 @@ class User < ActiveRecord::Base
 
   def to_lower
     self.email = self.email.downcase
+  end
+
+  def create_remember_token
+    self.remember_token = User.encrypt(User.new_remember_token)
   end
 
 end

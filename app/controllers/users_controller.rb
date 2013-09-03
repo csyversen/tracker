@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)  #.permit(:email, :password, :confirmed_password))
     if @user.save
-      # do whatever
+      sign_in @user
       flash[:success] = "Successfully created a new user!"
       redirect_to @user
     else

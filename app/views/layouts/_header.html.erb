@@ -3,9 +3,11 @@
     <div class="container">
       <nav>
         <ul class="nav">
+          <li><%= link_to "Home", root_path %></li>
+
           <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Login", root_path %></li>
           <li class="<%= 'active' if current_page?(tracking_menu_path) %>"><%= link_to("Products", {:controller => "tracking", :action => "menu"}) %></li>
-          <li class="<%= 'active' if current_page?(logout_path) %>"><%= link_to("Logout", logout_path) %></li>
+          <li class="<%= 'active' if current_page?(logout_path) %>"><%= link_to("Logout", logout_path, method: "delete") %></li>
         </ul>
       <nav>
     </div>
