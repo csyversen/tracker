@@ -47,6 +47,10 @@ gem 'capistrano', group: :development
 gem 'bootstrap-sass'
 gem 'public_suffix'
 gem 'nokogiri'
+gem 'faker'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+
 
 group :development, :test do
   gem 'rspec-rails'
