@@ -2,6 +2,7 @@ Tracker::Application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :products
 
   match '/login',             to: 'sessions#new',         via: 'get'
   match '/logout',            to: 'sessions#destroy',     via: 'delete'

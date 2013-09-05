@@ -1,0 +1,6 @@
+
+<tr class="<%= cycle('odd', 'even')%>">
+  <td><%= link_to(product.name, product.url, :target => "_blank") %></td>
+  <td><%= number_to_currency(product.current_price) %></td>
+  <td><%= number_to_currency(product.lowest_price) %></td>
+</tr>
