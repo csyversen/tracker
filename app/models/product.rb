@@ -10,6 +10,7 @@ class Product < ActiveRecord::Base
   before_create :check_amazon
   before_create :check_if_product_exists
 
+  validates_uniqueness_of :url
 
   #scope :current_price, -> { prices.last }
 
@@ -45,6 +46,11 @@ class Product < ActiveRecord::Base
 
   def check_if_product_exists
     # if the product already exists, we can just add this user as a 'subscriber' to the product. We don't need a new entry
+    if(p = Product.find_by(url: self.url))
+      p.users << self.current_user 
+    else
+
+    end
   end
 
 

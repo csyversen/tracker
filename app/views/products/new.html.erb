@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="span6 offset3">
+    <h2>Track a new product</h2>
+    <%= form_for(@product) do |f| %>
+      <%= f.text_field(:url, {class: "input", placeholder: "URL"}) %>
+      <%= f.submit("Add New Tracker", class: "btn btn-large btn-primary") %>
+    <% end %>
+  </div>
+</div>
