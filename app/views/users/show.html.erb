@@ -7,4 +7,19 @@
       </h1>
     </section>
   </aside>
+
+  <div class="span8">
+    <h3>You're following <%= pluralize(@user.products.count, "product") %></h3>
+    <% if @user.products.any? %>
+    <table class="table table-striped table-hover" summary="product list">
+      <tr class="header">
+        <th>Product</th>
+        <th>Current Price</th>
+        <th>Lowest Price</th>
+      </tr>
+        <%= render @products %>
+      </table>
+      <%= will_paginate @products %>
+    <% end %>
+  </div>
 </div>
