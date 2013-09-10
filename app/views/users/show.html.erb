@@ -1,12 +1,13 @@
 <div class="row">
-  <aside class="span4">
+  <aside class="span2">
     <section>
       <h1>
-        <%= gravatar_for @user %>
         <%= @user.email %>
       </h1>
     </section>
   </aside>
+
+<%= render partial: "products/product_form", locals: { product: @product } %>
 
   <div class="span8">
     <h3>You're following <%= pluralize(@user.products.count, "product") %></h3>

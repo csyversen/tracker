@@ -1,0 +1,6 @@
+<div class="container">
+  <%= form_for product, :class => "form-horizontal"  do |f| %>
+      <%= f.text_field "url",  {:class => "input-xxlarge", :placeholder => "Product URL"} %>
+      <%= submit_tag "Track", class: "btn btn-primary" %>
+  <% end %>
+</div>

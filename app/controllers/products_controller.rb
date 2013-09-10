@@ -10,7 +10,12 @@ class ProductsController < ApplicationController
 
 
   def create
-    @product = Product.create(product_params)
+    if(logged_in?)
+      @product = current_user.products.create(product_params)
+    else
+      @product = Product.create(product_params)
+    end
+
     if @product.save
       flash[:success] = "Successfully added a product!"
       redirect_to @product
