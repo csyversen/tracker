@@ -28,7 +28,7 @@ GEM
     arel (4.0.0)
     atomic (1.1.13)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.3.2.1)
+    bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.9)
       will_paginate
