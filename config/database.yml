@@ -30,10 +30,9 @@ test:
   socket: /tmp/mysql.sock
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   database: tracker_production
   pool: 5
-  username: root
+  username: myapp
   password:
-  socket: /tmp/mysql.sock
