@@ -46,10 +46,11 @@ gem 'capistrano', group: :development
 
 gem 'bootstrap-sass'
 gem 'public_suffix'
-gem 'nokogiri'
+#gem 'nokogiri'
 gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'amazon-ecs'
 
 
 group :development, :test do
