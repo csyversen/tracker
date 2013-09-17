@@ -36,9 +36,9 @@ class Product < ActiveRecord::Base
 
     self.sale_site = domain.domain
 
-    doc = Nokogiri::HTML(open("#{self.url}"))
-    price = doc.css("span#actualPriceValue")[0].text[1..-1]
-    self.name = doc.css("span#btAsinTitle")[0].text
+    #doc = Nokogiri::HTML(open("#{self.url}"))
+    #price = doc.css("span#actualPriceValue")[0].text[1..-1]
+    #self.name = doc.css("span#btAsinTitle")[0].text
 
     Amazon::Ecs.options = {
       :associate_tag => '',
@@ -46,8 +46,9 @@ class Product < ActiveRecord::Base
       :AWS_secret_key => ''
     }
 
-    item = Amazon::Ecs.item_lookup(asin, { response_group: 'Offers' } )
-    if (item.is_valid_request? && !item.has_error?)
+    item = Amazon::Ecs.item_lookup(asin, { response_group: 'Offers, Small' } )
+    if (item.is_valid_request? && !item.has_error? && !item.items.empty)
+      self.name = item.items[0].get('ItemAttributes/Title')
       price = item.items[0].get('Offers/Offer/OfferListing/Price/Amount').to_f / 100
     else
       return false #"The request wasn't valid or there was an error"
