@@ -1,5 +1,4 @@
 require 'uri/http'
-#require 'nokogiri'
 require 'open-uri'
 require 'amazon/ecs'
 
@@ -8,12 +7,15 @@ class Product < ActiveRecord::Base
   has_many :prices
   has_and_belongs_to_many :users
 
+  before_validation :get_asin
   before_create :check_amazon
   before_create :check_if_tracking_product
 
-  validates_uniqueness_of :url
+  validates_uniqueness_of :asin
 
   #scope :current_price, -> { prices.last }
+
+  attr_accessor :url
 
   def current_price
     prices.last.price
@@ -27,12 +29,22 @@ class Product < ActiveRecord::Base
   private
 ##########################################################
 
+  def get_asin
+    unless self.url.scan(/http:\/\/(?:www\.|)amazon\.com\/(?:gp\/product|[^\/]+\/dp|dp)\/([^\/]+)/).flatten[0].empty?
+      self.asin = self.url.scan(/http:\/\/(?:www\.|)amazon\.com\/(?:gp\/product|[^\/]+\/dp|dp)\/([^\/]+)/).flatten[0]
+      puts "ASIN!!!: #{self.asin}"
+    else
+      false
+    end
+  end
+
+
   def check_amazon
     uri = URI.parse(self.url)
     domain = PublicSuffix.parse(uri.host) 
 
     stripped_url = uri.path
-    asin = "" 
+    #self.asin = self.url.scan(/http:\/\/(?:www\.|)amazon\.com\/(?:gp\/product|[^\/]+\/dp|dp)\/([^\/]+)/)  
 
     self.sale_site = domain.domain
 
@@ -41,13 +53,13 @@ class Product < ActiveRecord::Base
     #self.name = doc.css("span#btAsinTitle")[0].text
 
     Amazon::Ecs.options = {
-      :associate_tag => '',
-      :AWS_access_key_id => '',
-      :AWS_secret_key => ''
+      :associate_tag => '9767-7881-5383',
+      :AWS_access_key_id => 'AKIAI4QUG3ULU7WGGVXA',
+      :AWS_secret_key => '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'
     }
 
-    item = Amazon::Ecs.item_lookup(asin, { response_group: 'Offers, Small' } )
-    if (item.is_valid_request? && !item.has_error? && !item.items.empty)
+    item = Amazon::Ecs.item_lookup(self.asin, { response_group: 'Offers, Small' } )
+    if (item.is_valid_request? && !item.has_error? && !item.items.empty?)
       self.name = item.items[0].get('ItemAttributes/Title')
       price = item.items[0].get('Offers/Offer/OfferListing/Price/Amount').to_f / 100
     else
@@ -63,10 +75,8 @@ class Product < ActiveRecord::Base
 
   def check_if_tracking_product
     # if the product already exists, we can just add this user as a 'subscriber' to the product. We don't need a new entry
-    if(p = Product.find_by(url: self.url))
+    if(p = Product.find_by(asin: self.asin))
       p.users << self.current_user 
-    else
-
     end
   end
 
