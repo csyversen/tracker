@@ -1,8 +1,8 @@
 Tracker::Application.routes.draw do
 
   scope :api do
-    get "/products(.:format)" => "products#index"
-    get "/products/:id(.:format)" => "products#show"
+    get "/api/products(.:format)" => "products#index"
+    get "/api/products(.:format)/:id" => "products#show"
   end
 
 
