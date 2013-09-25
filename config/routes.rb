@@ -1,5 +1,10 @@
 Tracker::Application.routes.draw do
 
+  scope :api do
+    get "/products(.:format)" => "products#index"
+  end
+
+
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :products

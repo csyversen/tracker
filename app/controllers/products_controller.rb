@@ -2,6 +2,11 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.paginate(page: params[:page])
+
+    respond_to do |format|
+      format.html 
+      format.json { render json: @products }
+    end
   end
 
   def new
