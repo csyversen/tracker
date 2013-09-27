@@ -1,8 +1,9 @@
 Tracker::Application.routes.draw do
 
-  scope :api do
-    get "/api/products(.:format)" => "products#index"
-    get "/api/products(.:format)/:id" => "products#show"
+  namespace :api, defaults: { format: 'json' } do
+    scope module: :v1 do
+      resources :products
+    end
   end
 
 
