@@ -2,11 +2,6 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.paginate(page: params[:page])
-
-    respond_to do |format|
-      format.html 
-      format.json { render json: @products }
-    end
   end
 
   def new
@@ -32,18 +27,8 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-
-    respond_to do |format|
-      format.html 
-      format.json { render json: @product }
-    end
   end
 
-
-  def update
-   @product = Product.find(params[:id])
-   @product.prices << params[:price]
-  end
 
 
 #################################################################
