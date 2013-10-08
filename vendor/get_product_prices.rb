@@ -5,20 +5,19 @@ require 'amazon/ecs'
 
 class TrackerApi
   def initialize
-    #@url = 'https://agile-ridge-9247.herokuapp.com/api/products'
-    @url = 'http://localhost:3000/api/products'
+    @url = 'agile-ridge-9247.herokuapp.com/api/products'
+    #@url = 'http://localhost:3000/api/products'
   end
 
   def get_products
     response = RestClient::Request.new(
       :method => :get,
-      :url => @url,
+      :url => "https://#{@url}",
       :user => "stupid",
       :password => "changemeforever",
       :content_type => "application/json"
       ).execute
 
-    #RestClient.get(@url, params: { name: "stupid", password: "changemeforever" } )
     return response.body
   end
 
@@ -60,18 +59,7 @@ class TrackerApi
 
         #RestClient.patch(@url<<"/#{p['id']}", params: { name: "stupid", password: "changemeforever", price: price } )
 
-        RestClient.put("http://stupid:changemeforever@localhost:3000/api/products" + "/#{p['id']}", price: price, content_type: "application/json")        
-
-        #response = RestClient::Request.new(
-        #  :method => :put,
-        #  :url => @url + "/#{p['id']}",
-        #  :user => "stupid",
-        #  :password => "changemeforever",
-        #  :content_type => "application/json",
-        #  :price => price
-        #).execute
-
-
+        RestClient.put("https://stupid:changemeforever@#{@url}" + "/#{p['id']}", price: price, content_type: "application/json")
 
       else
         puts "The request wasn't valid or there was an error. Skipping this product..."
