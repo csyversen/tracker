@@ -1,6 +1,7 @@
 require 'uri/http'
 require 'open-uri'
 require 'amazon/ecs'
+require 'yaml'
 
 class Product < ActiveRecord::Base
 
@@ -52,10 +53,12 @@ class Product < ActiveRecord::Base
     #price = doc.css("span#actualPriceValue")[0].text[1..-1]
     #self.name = doc.css("span#btAsinTitle")[0].text
 
+    conf = YAML::load(File.open('vendor/aws.yml'))
+
     Amazon::Ecs.options = {
-      :associate_tag => '9767-7881-5383',
-      :AWS_access_key_id => 'AKIAI4QUG3ULU7WGGVXA',
-      :AWS_secret_key => '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'
+      :associate_tag => conf['associate_tag'],
+      :AWS_access_key_id => conf['access_key_id'],
+      :AWS_secret_key => conf['secret_key']
     }
 
     item = Amazon::Ecs.item_lookup(self.asin, { response_group: 'Offers, Small' } )
