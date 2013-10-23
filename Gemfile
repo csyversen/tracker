@@ -51,6 +51,7 @@ gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'amazon-ecs'
+gem 'd3-rails'
 
 
 group :development, :test do

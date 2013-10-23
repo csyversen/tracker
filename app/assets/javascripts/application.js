@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require d3
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+
 

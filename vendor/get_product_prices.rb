@@ -55,7 +55,7 @@ class TrackerApi
       puts "Name: #{p['name']} and asin: #{p['asin']}"
       
       item = Amazon::Ecs.item_lookup(p['asin'], { response_group: 'Offers, Small' } )
-      if (item.is_valid_request? && !item.has_error? && !item.items.empty?)
+      if (item.is_valid_request? && !item.has_error? && !item.items.empty? && (item.items[0].get('Offers/Offer/OfferListing/Price/Amount').to_f / 100) != 0  )
         price = item.items[0].get('Offers/Offer/OfferListing/Price/Amount').to_f / 100
         puts price
 
