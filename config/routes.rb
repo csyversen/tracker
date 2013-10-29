@@ -3,6 +3,7 @@ Tracker::Application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     scope module: :v1 do
       resources :products
+      resources :prices
     end
   end
 
