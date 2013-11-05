@@ -2,18 +2,15 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-# .on "page:change",
 
 w = 500
 h = 100
 padding = 1
 
-#dataset = [ 1, 2, 3, 4, 5 ]
 
 $ ->
   $.ajax(url: "/api/prices/1").done (json) ->
-    $("#fart").append JSON.stringify(json)
-    
+    #$("#fart").append JSON.stringify(json)
 
     svg = d3.select("svg")
     svg.attr("width", w)
@@ -29,26 +26,13 @@ $ ->
         (d, i) -> i * ( w / json.length )
       )
       .attr("y",
+        (d) -> h - d.price
+      )
+      .attr("width", w / json.length - padding)
+      .attr("height", 
         (d) -> d.price
       )
 
     console.log(json[0].price)
 
-    #rects.attr("x", 
-    #  (d, i) -> i * ( w / dataset.length )
-    #)
-    #.attr("y", 
-    #  (d) -> alert d.id  # h - d[2]
-#
- #   )
-    #.attr("width", w / dataset.length - padding)
-    #.attr("height", 
-    #  (d) -> d[2] * 4
-    #)
-    #.text((d) -> d[3])
-    #.attr("x", 
-    #  (d, i) -> i * (w / dataset.length) 
-    #).attr("y", (d) -> 
-    #  h - (d * 4)
-    #)
   
