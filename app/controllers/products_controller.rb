@@ -27,6 +27,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    gon.prices = @product.prices
   end
 
 

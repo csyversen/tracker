@@ -52,6 +52,7 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'amazon-ecs'
 gem 'd3-rails'
+gem 'gon'
 
 
 group :development, :test do
