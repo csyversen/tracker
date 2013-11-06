@@ -3,10 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-w = 500
-h = 100
-padding = 1
-
+w = 800
+h = 500
+padding = 20
 
 $ ->
   json = gon.prices
@@ -14,22 +13,28 @@ $ ->
   svg.attr("width", w)
      .attr("height", h)
 
-  rects = svg.selectAll("rect")
+  scale = d3.scale.linear()
+  scale.domain([gon.min_price, gon.max_price])
+  scale.range([0, h])
+
+
+  rects = svg.selectAll("circle")
     .data( json )
     .enter()
-    .append("rect")
+    .append("circle")
     
   rectAttr = rects
-    .attr("x",
+    .attr("cx",
       (d, i) -> i * ( w / json.length )
     )
-    .attr("y",
-      (d) -> h - d.price
+    .attr("cy",
+      (d) -> scale(h - d.price)
     )
-    .attr("width", w / json.length - padding)
-    .attr("height", 
-      (d) -> d.price
-    )
+    .attr("r", 5)
+    #.attr("width", w / json.length - padding)
+    #.attr("height", 
+    #  (d) -> d.price
+    #)
 
   console.log(json[0].price)
 

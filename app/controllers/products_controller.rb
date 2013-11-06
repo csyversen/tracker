@@ -28,6 +28,8 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     gon.prices = @product.prices
+    gon.max_price = @product.prices.maximum('price')
+    gon.min_price = @product.prices.minimum('price')
   end
 
 
