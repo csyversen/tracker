@@ -28,7 +28,7 @@ $ ->
       (d, i) -> i * ( w / json.length )
     )
     .attr("cy",
-      (d) -> scale(h - d.price)
+      (d) -> scale(d.price)
     )
     .attr("r", 5)
     #.attr("width", w / json.length - padding)
