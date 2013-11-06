@@ -5,7 +5,7 @@
 
 w = 800
 h = 500
-padding = 20
+padding = 30
 
 $ ->
   json = gon.prices
@@ -13,28 +13,59 @@ $ ->
   svg.attr("width", w)
      .attr("height", h)
 
-  scale = d3.scale.linear()
-  scale.domain([gon.min_price, gon.max_price])
-  scale.range([0, h])
+
+  y_scale = d3.scale.linear()
+  y_scale.domain( [gon.min_price, gon.max_price] )
+  y_scale.range( [h - padding, padding] ) # smaller prices will appear at the bottom 
+
+  x_scale = d3.scale.linear()
+  x_scale.domain( [0, json.length] )
+  x_scale.range( [padding, w - padding] )
+
+  x_axis = d3.svg.axis()
+  x_axis.scale(x_scale)
+  x_axis.orient("bottom")
+
+  y_axis = d3.svg.axis()
+    .scale(y_scale)
+    .orient("left")
 
 
-  rects = svg.selectAll("circle")
+  svg.append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(0, " + (h - padding) + ")")
+    .call(x_axis)
+
+  svg.append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(" + padding + ", 0)")
+    .call(y_axis)
+
+  circ = svg.selectAll("circle")
     .data( json )
     .enter()
     .append("circle")
     
-  rectAttr = rects
+  circAttr = circ
     .attr("cx",
-      (d, i) -> i * ( w / json.length )
+      (d, i) -> x_scale(i)     #i * ( w / json.length )
     )
     .attr("cy",
-      (d) -> scale(d.price)
+      (d) -> y_scale(d.price)
     )
     .attr("r", 5)
-    #.attr("width", w / json.length - padding)
-    #.attr("height", 
-    #  (d) -> d.price
-    #)
+
+  svg.selectAll("text")
+    .data( json )
+    .enter()
+    .append("text")
+    .text( (d) -> 
+      "$" + d.price
+    )
+    .attr("x", (d, i) -> x_scale(i))
+    .attr("y", (d) -> y_scale(d.price))
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "11px") 
 
   console.log(json[0].price)
 
