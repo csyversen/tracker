@@ -4,18 +4,23 @@ describe "UserPages" do
 
   subject { page }
 
-  describe "edit" do
+  describe "user home" do
     let(:user) { FactoryGirl.create(:user) }
-    before { visit edit_user_path(user) }
 
-    describe "page" do
-      it { should have_content('Update your profile') }
-      it { should have_link("change", href: "http://gravatar.com/emails") }
+    before { visit login_path }
+
+    before do
+      fill_in "Email",      with: user.email.upcase
+      fill_in "Password",   with: user.password
+      click_button "Sign in"
     end
 
-    describe "with invalid info" do
-      before { click_button "Save" }
-      it { should have_content("error") }
+    #before { visit user_path(user) }
+
+    describe "page" do
+      it { should have_link( "Home/Users", href: user_path(user)) }
     end
   end
 end
+
+  

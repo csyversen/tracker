@@ -58,6 +58,7 @@ gem 'gon'
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'guard-rspec'
 end
 
 group :test do

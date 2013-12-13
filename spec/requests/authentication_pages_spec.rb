@@ -7,6 +7,10 @@ describe "Authentication" do
   describe "sign in page" do
     before { visit login_path }
 
+    describe "check create account" do
+      it { should have_content "Don't have an account?" }
+    end
+
     describe "with invalid information" do
       before { click_button "Sign in" }
 
@@ -14,7 +18,7 @@ describe "Authentication" do
       it { should have_selector('div.alert.alert-error', text: 'Invalid') }
 
       describe "after visiting anotehr page" do
-        before { click_link "Home" }
+        before { click_link "Products" }
         it { should_not have_selector('div.alert.alert-error') }
       end
     end
