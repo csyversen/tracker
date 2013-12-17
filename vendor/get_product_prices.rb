@@ -6,7 +6,7 @@ require 'yaml'
 
 class TrackerApi
   def initialize
-    @url = 'agile-ridge-9247.herokuapp.com/api/products' #'http://localhost:3000/api/products'
+    @url = 'amazontracker.herokuapp.com/api/products' #'http://localhost:3000/api/products'
     @conf = YAML::load(File.open('aws.yml'))
   end
 
