@@ -6,4 +6,4 @@
 
 <svg></svg>
 
-<p><%= link_to "Back to your products", current_user %></p>
+<p><%= link_to "Back to your products", logged_in? ? current_user : products_path %></p>
