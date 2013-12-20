@@ -2,71 +2,53 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+margin = { top: 20, right: 20, bottom: 20, left: 20 }
 
-w = 800
-h = 500
-padding = 30
+w = 960 - margin.left - margin.right
+h = 500 - margin.top - margin.bottom
 
 $ ->
-  json = gon.prices
+  prices = gon.prices
+  max_price = gon.max_price
+  min_price = gon.min_price
+  parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ").parse
+
+  x = d3.time.scale().range([0, w])
+  y = d3.scale.linear().range([h, 0])
+
+  x_axis = d3.svg.axis().scale(x).orient("bottom")
+  y_axis = d3.svg.axis().scale(y).ticks(4).orient("right")
+
+  line = d3.svg.line()
+    .x( (d) -> x(d.created_at))
+    .y( (d) -> y(d.price))
+
   svg = d3.select("svg")
-  svg.attr("width", w)
-     .attr("height", h)
+    .attr("width", w + margin.left + margin.right)
+    .attr("height", h + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
 
-  y_scale = d3.scale.linear()
-  y_scale.domain( [gon.min_price, gon.max_price] )
-  y_scale.range( [h - padding, padding] ) # smaller prices will appear at the bottom 
-
-  x_scale = d3.scale.linear()
-  x_scale.domain( [0, json.length] )
-  x_scale.range( [padding, w - padding] )
-
-  x_axis = d3.svg.axis()
-  x_axis.scale(x_scale)
-  x_axis.orient("bottom")
-
-  y_axis = d3.svg.axis()
-    .scale(y_scale)
-    .orient("left")
-
+  x.domain(d3.extent(prices, (d) -> parseDate(d.created_at)))
+  y.domain(d3.extent(prices, (d) -> +d.price))
 
   svg.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(0, " + (h - padding) + ")")
-    .call(x_axis)
+    .attr("class", "x axis")
+    .attr("transform", "translate(0, " + h + ")")
+    .call(x_axis)  
 
   svg.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(" + padding + ", 0)")
+    .attr("class", "y axis")
     .call(y_axis)
-
-  circ = svg.selectAll("circle")
-    .data( json )
-    .enter()
-    .append("circle")
-    
-  circAttr = circ
-    .attr("cx",
-      (d, i) -> x_scale(i)     #i * ( w / json.length )
-    )
-    .attr("cy",
-      (d) -> y_scale(d.price)
-    )
-    .attr("r", 5)
-
-  svg.selectAll("text")
-    .data( json )
-    .enter()
     .append("text")
-    .text( (d) -> 
-      "$" + d.price
-    )
-    .attr("x", (d, i) -> x_scale(i))
-    .attr("y", (d) -> y_scale(d.price))
-    .attr("font-family", "sans-serif")
-    .attr("font-size", "11px") 
-
-  console.log(json[0].price)
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Price ($)")
 
   
+
+
+  console.log(prices[0].created_at)
