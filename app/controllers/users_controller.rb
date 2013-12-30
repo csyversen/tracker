@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :signed_in_user 
-  before_action :correct_user
+  before_action :signed_in_user, except: [ :new ]
+  before_action :correct_user, except: [ :new ]
 
   def index
     @users = User.paginate(page: params[:page])
