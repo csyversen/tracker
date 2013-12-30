@@ -16,8 +16,8 @@ $ ->
   x = d3.time.scale().range([0, w])
   y = d3.scale.linear().range([h, 0])
 
-  x_axis = d3.svg.axis().scale(x).orient("bottom")
-  y_axis = d3.svg.axis().scale(y).ticks(4).orient("right")
+  x_axis = d3.svg.axis().scale(x).ticks(8).orient("bottom")
+  y_axis = d3.svg.axis().scale(y).ticks(5).orient("right")
 
   line = d3.svg.line()
     .x( (d) -> x(parseDate(d.created_at)))
