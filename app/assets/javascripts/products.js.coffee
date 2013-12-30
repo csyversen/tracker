@@ -20,8 +20,8 @@ $ ->
   y_axis = d3.svg.axis().scale(y).ticks(4).orient("right")
 
   line = d3.svg.line()
-    .x( (d) -> x(d.created_at))
-    .y( (d) -> y(d.price))
+    .x( (d) -> x(parseDate(d.created_at)))
+    .y( (d) -> y(+d.price))
 
   svg = d3.select("svg")
     .attr("width", w + margin.left + margin.right)
@@ -48,7 +48,11 @@ $ ->
       .style("text-anchor", "end")
       .text("Price ($)")
 
-  
+  svg.append("path")
+    .attr("d", line(prices))
+    .attr("class", "line")
+    .attr("stroke", "blue")
+    .attr("fill", "none")
 
 
   console.log(prices[0].created_at)
