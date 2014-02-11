@@ -6,7 +6,7 @@ require 'yaml'
 
 class TrackerApi
   def initialize
-    @url = 'amazontracker.herokuapp.com/api/products' #'http://localhost:3000/api/products'
+    @url = 'amazontracker.herokuapp.com/api/products' #'https://amazontracker.herokuapp.com/api/products' #'localhost:3000/api/products'
     @conf = YAML::load(File.open('aws.yml'))
   end
 
@@ -54,12 +54,15 @@ class TrackerApi
     hash.each do |p|
       puts "Name: #{p['name']} and asin: #{p['asin']}"
       
-      item = Amazon::Ecs.item_lookup(p['asin'], { response_group: 'Offers, Small' } )
+      item = Amazon::Ecs.item_lookup(p['asin'], { response_group: 'Offers, Small, Images' } )
       if (item.is_valid_request? && !item.has_error? && !item.items.empty? && (item.items[0].get('Offers/Offer/OfferListing/Price/Amount').to_f / 100) != 0  )
         price = item.items[0].get('Offers/Offer/OfferListing/Price/Amount').to_f / 100
         puts price
 
-        RestClient.put("https://stupid:changemeforever@#{@url}" + "/#{p['id']}", price: price, content_type: "application/json")
+        thumb_url = item.items[0].get('SmallImage/URL')
+        puts thumb_url
+
+        RestClient.put("https://stupid:changemeforever@#{@url}" + "/#{p['id']}", price: price, thumb_url: thumb_url )
       else
         puts "The request wasn't valid or there was an error. Skipping this product..."
       end

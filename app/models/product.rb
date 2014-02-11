@@ -8,7 +8,7 @@ class Product < ActiveRecord::Base
   has_many :prices
   has_and_belongs_to_many :users
 
-  before_validation :get_asin
+  before_create :get_asin
   before_create :check_amazon
   before_create :check_if_tracking_product
 

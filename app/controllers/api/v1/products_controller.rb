@@ -23,6 +23,10 @@ module Api
         p = Price.new
         p.price = params[:price]
         @product.prices << p
+
+        @product.thumb_url = params[:thumb_url]
+        @product.save
+
         respond_with @product
       end
 

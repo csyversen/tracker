@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130917210350) do
+ActiveRecord::Schema.define(version: 20140210214541) do
 
   create_table "prices", force: true do |t|
     t.integer  "product_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20130917210350) do
     t.string   "asin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "thumb_url"
   end
 
   create_table "products_users", id: false, force: true do |t|
