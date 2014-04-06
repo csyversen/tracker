@@ -15,5 +15,5 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
-/vendor/aws.yml
+/config/aws.yml
 /config/amazon_env.rb
