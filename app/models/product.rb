@@ -41,19 +41,6 @@ class Product < ActiveRecord::Base
 
 
   def check_amazon
-    uri = URI.parse(self.url)
-    domain = PublicSuffix.parse(uri.host) 
-
-    stripped_url = uri.path
-    #self.asin = self.url.scan(/http:\/\/(?:www\.|)amazon\.com\/(?:gp\/product|[^\/]+\/dp|dp)\/([^\/]+)/)  
-
-    self.sale_site = domain.domain
-
-    #doc = Nokogiri::HTML(open("#{self.url}"))
-    #price = doc.css("span#actualPriceValue")[0].text[1..-1]
-    #self.name = doc.css("span#btAsinTitle")[0].text
-
-    #conf = YAML::load(File.open('vendor/aws.yml'))
 
     Amazon::Ecs.options = {
       :associate_tag => ENV['ASSOCIATE_TAG'],
@@ -79,7 +66,7 @@ class Product < ActiveRecord::Base
   def check_if_tracking_product
     # if the product already exists, we can just add this user as a 'subscriber' to the product. We don't need a new entry
     if(p = Product.find_by(asin: self.asin))
-      p.users << self.current_user 
+      p.users << self.current_user
     end
   end
 

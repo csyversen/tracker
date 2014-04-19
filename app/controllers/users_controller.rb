@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :signed_in_user, except: [ :new ]
-  before_action :correct_user, except: [ :new ]
+  before_action :signed_in_user, except: [ :new, :create ]
+  before_action :correct_user, except: [ :new, :create ]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
 
-  def edit 
+  def edit
     #@user = User.find(params[:id])
   end
 
