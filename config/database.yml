@@ -36,5 +36,3 @@ production:
   pool: 5
   username: myapp
   password:
-cucumber:
-  <<: *test
