@@ -46,18 +46,15 @@ gem 'capistrano', group: :development
 
 gem 'bootstrap-sass', '~> 2'
 gem 'public_suffix'
-#gem 'nokogiri'
 gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'amazon-ecs'
 gem 'd3-rails'
 gem 'gon'
-# These 4 gems might need to go into the dev group only
+# These 2 gems might need to go into the dev group only
 gem 'rest_client'
 gem 'json'
-#gem 'amazon-ecs'
-#gem 'yaml'
 
 
 group :development, :test do
