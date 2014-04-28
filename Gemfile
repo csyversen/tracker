@@ -44,7 +44,7 @@ gem 'capistrano', group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'bootstrap-sass', '~> 2'
+gem 'bootstrap-sass'
 gem 'public_suffix'
 gem 'faker'
 gem 'will_paginate'
