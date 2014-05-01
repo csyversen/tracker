@@ -55,6 +55,7 @@ gem 'gon'
 # These 2 gems might need to go into the dev group only
 gem 'rest_client'
 gem 'json'
+gem 'jquery-turbolinks'
 
 
 group :development, :test do
