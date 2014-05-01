@@ -24,10 +24,16 @@ module Api
         p.price = params[:price]
         @product.prices << p
 
-        @product.thumb_url = params[:thumb_url]
-        @product.save
+        begin
+          @product.thumb_url = params[:thumb_url]
+          @product.save
 
-        respond_with @product
+          respond_with @product
+        rescue Exception => e
+          Rails.logger e.msg
+
+          respond_with e.msg
+        end
       end
 
     end
