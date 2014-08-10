@@ -1,7 +1,6 @@
 require 'uri/http'
 require 'open-uri'
 require 'amazon/ecs'
-#require 'yaml'
 
 class Product < ActiveRecord::Base
 
