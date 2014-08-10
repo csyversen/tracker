@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 4'
 
-# Use mysql as the database for Active Record
-gem 'mysql2'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 4'
 
@@ -35,16 +32,8 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '>= 3'
 
-# Use unicorn as the app server
-# gem 'unicorn'
 
-# Use Capistrano for deployment
-gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
-gem 'bootstrap-sass', '~> 2'
+gem 'bootstrap-sass'
 gem 'public_suffix'
 gem 'faker'
 gem 'will_paginate'
@@ -57,11 +46,15 @@ gem 'rest_client'
 gem 'json'
 gem 'jquery-turbolinks'
 
+group :development do
+  gem 'capistrano'
+end
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'guard-rspec'
+  gem 'sqlite3'
+  gem 'byebug'
 end
 
 group :test do
